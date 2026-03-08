@@ -285,6 +285,8 @@
   }
 
   /* About */
+  #about { background: var(--white); }
+
   .about {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -575,11 +577,183 @@
 
   /* Horizontal rule */
   hr { border: none; border-top: 1px solid var(--light-gray); margin: 0; }
+
+  /* ===== NAV OVERLAY ===== */
+  .nav-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 200;
+  }
+  .nav-menu-btn span {
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--black);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .nav-menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-menu-btn.open span:nth-child(2) { opacity: 0; }
+  .nav-menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--white);
+    z-index: 150;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .nav-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .nav-overlay-links {
+    list-style: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .nav-overlay-links a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 0.03em;
+    color: var(--black);
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .nav-overlay-links a:hover { opacity: 0.4; }
+  .nav-overlay-close {
+    position: absolute;
+    top: 22px; right: 24px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--black);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+  }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 768px) {
+    body { cursor: auto; }
+    .cursor { display: none; }
+
+    /* Nav */
+    nav {
+      padding: 20px 24px;
+      mix-blend-mode: normal;
+      background: var(--white);
+    }
+    .nav-links { display: none; }
+    .nav-menu-btn { display: flex; }
+
+    /* Hero */
+    .hero {
+      grid-template-columns: 1fr;
+      height: auto;
+      min-height: 100svh;
+    }
+    .hero-left {
+      padding: 100px 24px 48px;
+      justify-content: flex-end;
+    }
+    .hero-right {
+      height: 72vw;
+      min-height: 280px;
+    }
+    .hero-scroll { display: none; }
+
+    /* Section base */
+    section { padding: 72px 24px; }
+
+    /* Gallery */
+    .gallery { padding: 72px 24px; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-item:first-child {
+      grid-column: span 1;
+      aspect-ratio: 1;
+    }
+    .gallery-item { cursor: auto; }
+    .gallery-item-info { transform: translateY(0); }
+
+    /* About */
+    #about { padding: 72px 24px; }
+    .about {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .about-visual {
+      position: static;
+      top: auto;
+    }
+    .about-portrait { aspect-ratio: 4/3; }
+    .about-content { padding-top: 0; }
+
+    /* Works */
+    .works { padding: 72px 24px; }
+    .works-list { grid-template-columns: 1fr; }
+    .work-card { cursor: auto; }
+    .work-card-cta {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Process */
+    .process { padding: 72px 24px; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .process-step { padding: 32px 20px; }
+
+    /* Contact */
+    .contact { padding: 100px 24px; }
+
+    /* Footer */
+    footer {
+      padding: 24px;
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+    }
+
+    /* Info notice */
+    #price > div:last-child { margin-top: 32px; }
+  }
+
+  @media (max-width: 480px) {
+    .process-steps { grid-template-columns: 1fr; }
+    .contact-sns { gap: 24px; }
+  }
 </style>
 </head>
 <body>
 
 <div class="cursor" id="cursor"></div>
+
+<!-- Nav overlay (mobile) -->
+<div class="nav-overlay" id="navOverlay">
+  <button class="nav-overlay-close" id="menuClose" aria-label="閉じる">×</button>
+  <ul class="nav-overlay-links">
+    <li><a href="#gallery" class="overlay-link">works</a></li>
+    <li><a href="#about" class="overlay-link">about</a></li>
+    <li><a href="#price" class="overlay-link">price</a></li>
+    <li><a href="#contact" class="overlay-link">contact</a></li>
+  </ul>
+</div>
 
 <!-- Nav -->
 <nav>
@@ -590,6 +764,9 @@
     <li><a href="#price">price</a></li>
     <li><a href="#contact">contact</a></li>
   </ul>
+  <button class="nav-menu-btn" id="menuBtn" aria-label="メニューを開く">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- Hero -->
@@ -706,7 +883,7 @@
 </section>
 
 <!-- About -->
-<section id="about" style="padding: 120px 48px; background: var(--white);">
+<section id="about">
   <div class="section-number reveal">02 — about</div>
   <div class="about">
     <div class="about-visual reveal">
@@ -851,6 +1028,28 @@
 </footer>
 
 <script>
+  // Hamburger menu
+  const menuBtn = document.getElementById('menuBtn');
+  const menuClose = document.getElementById('menuClose');
+  const navOverlay = document.getElementById('navOverlay');
+
+  function openMenu() {
+    navOverlay.classList.add('open');
+    menuBtn.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    navOverlay.classList.remove('open');
+    menuBtn.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  menuBtn.addEventListener('click', openMenu);
+  menuClose.addEventListener('click', closeMenu);
+  document.querySelectorAll('.overlay-link').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
   // Custom cursor
   const cursor = document.getElementById('cursor');
   document.addEventListener('mousemove', e => {
