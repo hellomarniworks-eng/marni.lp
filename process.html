@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>marni — process</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ===== PROCESS STEPS ===== */
+  .process-intro {
+    background: var(--white);
+  }
+  .process-lead {
+    max-width: 640px;
+    font-size: 20px; font-weight: 300;
+    line-height: 2; color: #444;
+    margin-bottom: 0;
+  }
+
+  .steps {
+    background: var(--black);
+    color: var(--white);
+    padding: 0;
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 480px;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-visual {
+    background: #111;
+    display: flex; align-items: center; justify-content: center;
+    padding: 80px;
+    order: 0;
+  }
+  .step:nth-child(even) .step-visual { order: 1; }
+  .step-content {
+    padding: 80px 64px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .step-num {
+    font-size: 96px; font-weight: 300; font-style: italic;
+    line-height: 1; color: #1e1e1e;
+    margin-bottom: 16px;
+  }
+  .step-label {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 24px;
+  }
+  .step-title {
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 300; font-style: italic;
+    line-height: 1.1; margin-bottom: 24px;
+  }
+  .step-text {
+    font-size: 16px; font-weight: 300;
+    line-height: 2; color: #888;
+  }
+
+  /* ===== MATERIALS ===== */
+  .materials { background: var(--light-gray); }
+  .materials-title {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300; margin-bottom: 80px;
+  }
+  .materials-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--accent);
+  }
+  .material-item {
+    background: var(--white); padding: 48px 40px;
+  }
+  .material-name {
+    font-size: 22px; font-weight: 300; font-style: italic;
+    margin-bottom: 16px;
+  }
+  .material-desc {
+    font-size: 14px; font-weight: 300;
+    line-height: 2; color: var(--gray);
+  }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 768px) {
+    .process-intro { padding: 72px 24px; }
+
+    .step {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .step-visual { padding: 48px; min-height: 240px; order: 0 !important; }
+    .step-content { padding: 40px 24px; order: 1 !important; }
+    .step-num { font-size: 64px; }
+
+    .materials { padding: 72px 24px; }
+    .materials-grid { grid-template-columns: 1fr; }
+    .material-item { padding: 36px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<div class="nav-overlay" id="navOverlay">
+  <button class="nav-overlay-close" id="menuClose" aria-label="閉じる">×</button>
+  <ul class="nav-overlay-links">
+    <li><a href="works.html" class="overlay-link">works</a></li>
+    <li><a href="concept.html" class="overlay-link">concept</a></li>
+    <li><a href="process.html" class="overlay-link">process</a></li>
+    <li><a href="#contact" class="overlay-link">contact</a></li>
+  </ul>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo">marni</a>
+  <ul class="nav-links">
+    <li><a href="works.html">works</a></li>
+    <li><a href="concept.html">concept</a></li>
+    <li><a href="process.html" aria-current="page">process</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <button class="nav-menu-btn" id="menuBtn" aria-label="メニューを開く">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="page-hero-num">03 — process</div>
+  <h1 class="page-hero-title">制作<br><em>について</em></h1>
+  <p class="page-hero-sub">
+    スケッチから完成まで、4つのステップ。<br>
+    すべて手作業、一点制作。
+  </p>
+</div>
+
+<!-- Intro -->
+<section class="process-intro">
+  <div class="section-number reveal">how it's made</div>
+  <p class="process-lead reveal">
+    すべての作品は、紙と鉛筆から始まる。
+    形を探し、木を切り、色を重ね、空間に置く。
+    その繰り返しの中で、一点の作品が生まれる。
+  </p>
+</section>
+
+<hr>
+
+<!-- Steps -->
+<div class="steps">
+
+  <div class="step">
+    <div class="step-visual reveal">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style="width:80%;max-width:280px;">
+        <rect width="400" height="400" fill="#0a0a0a"/>
+        <!-- Sketch lines -->
+        <path d="M80 200 Q150 120 200 160 Q250 200 300 140" stroke="#c8c4b8" stroke-width="1.5" fill="none" opacity="0.6"/>
+        <path d="M100 220 Q160 150 210 180 Q270 210 320 160" stroke="#c8c4b8" stroke-width="1" fill="none" opacity="0.3"/>
+        <path d="M150 280 Q200 220 260 250 Q300 270 340 230" stroke="#c8c4b8" stroke-width="1" fill="none" opacity="0.2"/>
+        <!-- Pencil dot -->
+        <circle cx="300" cy="140" r="3" fill="#c8b860" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="step-content reveal reveal-delay-1">
+      <div class="step-num">01</div>
+      <div class="step-label">sketch</div>
+      <h2 class="step-title">形を探す</h2>
+      <p class="step-text">
+        有機的なフォームをスケッチで探る。
+        自然物・身体・記憶から形を引き出す。
+        正解のない問いに向き合う時間が、作品の輪郭を決める。
+      </p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-visual reveal">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style="width:80%;max-width:280px;">
+        <rect width="400" height="400" fill="#0a0a0a"/>
+        <!-- Wood board -->
+        <rect x="80" y="80" width="240" height="240" fill="#1a1614" rx="2"/>
+        <!-- Cut shape -->
+        <path d="M140 200 Q140 140 200 130 Q260 120 270 180 Q280 240 230 270 Q180 300 140 260 Z" fill="#2a2420"/>
+        <!-- Cut line -->
+        <path d="M140 200 Q140 140 200 130 Q260 120 270 180 Q280 240 230 270 Q180 300 140 260 Z" stroke="#c8c4b8" stroke-width="1" fill="none" opacity="0.6"/>
+      </svg>
+    </div>
+    <div class="step-content reveal reveal-delay-1">
+      <div class="step-num">02</div>
+      <div class="step-label">cut</div>
+      <h2 class="step-title">木を切り出す</h2>
+      <p class="step-text">
+        型紙をもとにシナベニヤ・MDFを切り出す。
+        曲線の精度が作品の質を決める。
+        パーツを複数切り出し、レイヤーで奥行きを作る。
+      </p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-visual reveal">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style="width:80%;max-width:280px;">
+        <rect width="400" height="400" fill="#0a0a0a"/>
+        <!-- Color swatches -->
+        <rect x="80" y="120" width="80" height="80" fill="#c8b860" rx="1"/>
+        <rect x="170" y="120" width="80" height="80" fill="#f0ead8" rx="1"/>
+        <rect x="260" y="120" width="80" height="80" fill="#1a1a1a" rx="1"/>
+        <rect x="80" y="210" width="80" height="80" fill="#c8c4b8" rx="1"/>
+        <rect x="170" y="210" width="80" height="80" fill="#2a2a2a" rx="1"/>
+        <rect x="260" y="210" width="80" height="80" fill="#d4c89a" rx="1"/>
+        <!-- Brush stroke -->
+        <path d="M100 340 Q160 330 220 340 Q280 350 340 335" stroke="#c8b860" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="step-content reveal reveal-delay-1">
+      <div class="step-num">03</div>
+      <div class="step-label">paint</div>
+      <h2 class="step-title">色を重ねる</h2>
+      <p class="step-text">
+        アクリル塗料で着彩。
+        パーツごとに塗り重ね、色の深みと木の質感を両立させる。
+        下地・中塗り・仕上げと、乾燥を挟みながら丁寧に進める。
+      </p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-visual reveal">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style="width:80%;max-width:280px;">
+        <rect width="400" height="400" fill="#0a0a0a"/>
+        <!-- Base panel -->
+        <rect x="80" y="80" width="240" height="240" fill="#c8c4b8" rx="2"/>
+        <!-- Composed shapes -->
+        <path d="M130 200 Q130 140 190 130 Q250 120 260 180 Q270 240 220 260 Q170 280 130 240 Z" fill="#c8b860"/>
+        <circle cx="240" cy="130" r="30" fill="#f0ead8"/>
+        <path d="M100 250 Q100 230 120 230 Q140 230 140 250 Q140 270 120 270 Z" fill="#1a1a1a"/>
+        <!-- Hanger -->
+        <rect x="185" y="72" width="30" height="6" fill="#888" rx="3"/>
+        <circle cx="192" cy="75" r="4" fill="none" stroke="#888" stroke-width="1.5"/>
+        <circle cx="208" cy="75" r="4" fill="none" stroke="#888" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <div class="step-content reveal reveal-delay-1">
+      <div class="step-num">04</div>
+      <div class="step-label">compose</div>
+      <h2 class="step-title">空間に置く</h2>
+      <p class="step-text">
+        ベースに形を配置・接着し、立体感を調整する。
+        吊り金具をつけて完成。
+        最後に作品を壁に当てて、空間との対話を確認する。
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Materials -->
+<section class="materials">
+  <div class="section-number reveal">materials</div>
+  <h2 class="materials-title reveal">使用素材</h2>
+  <div class="materials-grid">
+    <div class="material-item reveal">
+      <div class="material-name">シナベニヤ</div>
+      <p class="material-desc">
+        表面が滑らかで加工しやすい。
+        軽量でありながら強度があり、
+        曲線カットに向いている。
+        主にトップパーツに使用。
+      </p>
+    </div>
+    <div class="material-item reveal reveal-delay-1">
+      <div class="material-name">MDF</div>
+      <p class="material-desc">
+        均質で反りが少なく、安定したベースになる。
+        塗料の吸いが均一で、発色が美しい。
+        バックパネルや厚みを出すパーツに使用。
+      </p>
+    </div>
+    <div class="material-item reveal reveal-delay-2">
+      <div class="material-name">アクリル塗料</div>
+      <p class="material-desc">
+        速乾性で重ね塗りがしやすい。
+        発色と耐久性のバランスが良く、
+        マットから艶まで質感を選べる。
+        全作品の着彩に使用。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-title reveal">
+      作品を、<br>部屋に迎えませんか。
+    </h2>
+    <p class="contact-sub reveal">お気軽にご連絡ください</p>
+    <a href="mailto:hello@marni-works.com" class="contact-email reveal">hello@marni-works.com</a>
+    <div class="contact-sns reveal">
+      <a href="#">instagram</a>
+      <a href="#">minne</a>
+      <a href="#">creema</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 marni</span>
+  <span>wall works — original art objects</span>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const menuClose = document.getElementById('menuClose');
+  const navOverlay = document.getElementById('navOverlay');
+  function openMenu() { navOverlay.classList.add('open'); menuBtn.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { navOverlay.classList.remove('open'); menuBtn.classList.remove('open'); document.body.style.overflow = ''; }
+  menuBtn.addEventListener('click', openMenu);
+  menuClose.addEventListener('click', closeMenu);
+  document.querySelectorAll('.overlay-link').forEach(l => l.addEventListener('click', closeMenu));
+
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

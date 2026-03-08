@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>marni — concept</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ===== ABOUT ===== */
+  #about { background: var(--white); }
+
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: start;
+  }
+  .about-visual { position: sticky; top: 120px; }
+  .about-portrait {
+    width: 100%; aspect-ratio: 3/4;
+    background: var(--light-gray);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .about-content { padding-top: 40px; }
+  .about-title {
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300; line-height: 1.1; margin-bottom: 40px;
+  }
+  .about-title em { font-style: italic; }
+  .about-text {
+    font-size: 18px; font-weight: 300;
+    line-height: 2; color: #444; margin-bottom: 24px;
+  }
+  .about-statement {
+    margin-top: 48px; padding: 32px;
+    border-left: 1px solid var(--black);
+    font-size: 22px; font-style: italic;
+    font-weight: 300; line-height: 1.6; color: var(--black);
+  }
+
+  /* ===== VALUES ===== */
+  .values {
+    background: var(--black);
+    color: var(--white);
+    padding: 120px 48px;
+  }
+  .values .section-number { color: var(--accent); }
+  .values .section-number::after { background: #2a2a2a; }
+  .values-title {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300; font-style: italic;
+    margin-bottom: 80px;
+  }
+  .values-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2px; background: #1a1a1a;
+  }
+  .values-item {
+    background: var(--black); padding: 56px 48px;
+  }
+  .values-item-num {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 24px;
+  }
+  .values-item-title {
+    font-size: 28px; font-weight: 300; font-style: italic;
+    margin-bottom: 20px; line-height: 1.1;
+  }
+  .values-item-text {
+    font-size: 15px; font-weight: 300;
+    line-height: 2; color: #888;
+  }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 768px) {
+    #about { padding: 72px 24px; }
+    .about { grid-template-columns: 1fr; gap: 40px; }
+    .about-visual { position: static; top: auto; }
+    .about-portrait { aspect-ratio: 4/3; }
+    .about-content { padding-top: 0; }
+
+    .values { padding: 72px 24px; }
+    .values-grid { grid-template-columns: 1fr; }
+    .values-item { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<div class="nav-overlay" id="navOverlay">
+  <button class="nav-overlay-close" id="menuClose" aria-label="閉じる">×</button>
+  <ul class="nav-overlay-links">
+    <li><a href="works.html" class="overlay-link">works</a></li>
+    <li><a href="concept.html" class="overlay-link">concept</a></li>
+    <li><a href="process.html" class="overlay-link">process</a></li>
+    <li><a href="#contact" class="overlay-link">contact</a></li>
+  </ul>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo">marni</a>
+  <ul class="nav-links">
+    <li><a href="works.html">works</a></li>
+    <li><a href="concept.html" aria-current="page">concept</a></li>
+    <li><a href="process.html">process</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <button class="nav-menu-btn" id="menuBtn" aria-label="メニューを開く">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="page-hero-num">02 — concept</div>
+  <h1 class="page-hero-title">形は、<br><em>思考の残像だ。</em></h1>
+  <p class="page-hero-sub">
+    有機的なフォームと素材の対話。<br>
+    marniが大切にしていること。
+  </p>
+</div>
+
+<!-- About -->
+<section id="about">
+  <div class="section-number reveal">artist</div>
+  <div class="about">
+    <div class="about-visual reveal">
+      <div class="about-portrait">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+          <rect width="300" height="400" fill="#e8e4d8"/>
+          <path d="M80 280 Q80 160 150 120 Q220 80 240 160 Q260 240 220 310 Q180 380 80 350 Z" fill="#c8c4b8"/>
+          <ellipse cx="155" cy="180" rx="55" ry="70" fill="#d4c8a8"/>
+          <circle cx="135" cy="165" r="12" fill="#1a1a1a"/>
+          <circle cx="175" cy="162" r="12" fill="#1a1a1a"/>
+          <path d="M130 200 Q155 215 180 200" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+        </svg>
+      </div>
+    </div>
+    <div class="about-content reveal reveal-delay-1">
+      <h2 class="about-title">形は、<br><em>思考の残像だ。</em></h2>
+      <p class="about-text">
+        現代アートの文脈を学びながら、有機的なフォームと素材の対話を探求している。
+        木を切り、塗り、重ねる過程は、アイデアを空間に定着させる行為だと思っている。
+      </p>
+      <p class="about-text">
+        シュルレアリスムやバイオモーフィックアブストラクションの系譜に立ちながら、
+        それを「今日の部屋」に持ち込むことを試みる。
+        美術館の作品が家の壁にある、その感覚を。
+      </p>
+      <blockquote class="about-statement">
+        「自然が果実を生み出すように、<br>
+        作品が壁から生えてくるような感覚を作りたい。」
+      </blockquote>
+      <p class="about-text" style="margin-top: 40px; font-size: 14px; letter-spacing: 0.05em; color: #8a8a8a;">
+        素材：シナベニヤ、MDF、アクリル塗料<br>
+        すべて手作業による一点制作
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- Values -->
+<section class="values">
+  <div class="section-number reveal">values</div>
+  <h2 class="values-title reveal">大切にしていること</h2>
+  <div class="values-grid">
+    <div class="values-item reveal">
+      <div class="values-item-num">01</div>
+      <div class="values-item-title">一点性</div>
+      <p class="values-item-text">
+        同じ作品は二つと存在しない。
+        型で量産するのではなく、毎回フォームを考え直す。
+        その偶然性と必然性の間に、作品の個性が宿る。
+      </p>
+    </div>
+    <div class="values-item reveal reveal-delay-1">
+      <div class="values-item-num">02</div>
+      <div class="values-item-title">有機性</div>
+      <p class="values-item-text">
+        幾何学的な正確さより、生き物のような曲線を大切にする。
+        自然物・身体・記憶から形を引き出し、
+        硬い素材の中に柔らかさを見出す。
+      </p>
+    </div>
+    <div class="values-item reveal reveal-delay-1">
+      <div class="values-item-num">03</div>
+      <div class="values-item-title">素材との対話</div>
+      <p class="values-item-text">
+        木が持つ質感・重さ・温もりを活かす。
+        塗料で覆いながらも、素材の存在感を残す。
+        手の痕跡が作品に残ることを恐れない。
+      </p>
+    </div>
+    <div class="values-item reveal reveal-delay-2">
+      <div class="values-item-num">04</div>
+      <div class="values-item-title">空間との関係</div>
+      <p class="values-item-text">
+        作品は壁に飾るものでなく、空間の一部になるものだと考える。
+        部屋に置かれた瞬間、その家の記憶になるような
+        存在感を目指している。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-title reveal">
+      作品を、<br>部屋に迎えませんか。
+    </h2>
+    <p class="contact-sub reveal">お気軽にご連絡ください</p>
+    <a href="mailto:hello@marni-works.com" class="contact-email reveal">hello@marni-works.com</a>
+    <div class="contact-sns reveal">
+      <a href="#">instagram</a>
+      <a href="#">minne</a>
+      <a href="#">creema</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 marni</span>
+  <span>wall works — original art objects</span>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const menuClose = document.getElementById('menuClose');
+  const navOverlay = document.getElementById('navOverlay');
+  function openMenu() { navOverlay.classList.add('open'); menuBtn.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { navOverlay.classList.remove('open'); menuBtn.classList.remove('open'); document.body.style.overflow = ''; }
+  menuBtn.addEventListener('click', openMenu);
+  menuClose.addEventListener('click', closeMenu);
+  document.querySelectorAll('.overlay-link').forEach(l => l.addEventListener('click', closeMenu));
+
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -4,739 +4,125 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>marni — wall works</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Neue+Haas+Grotesk+Display+Pro:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --black: #0a0a0a;
-    --white: #f5f4f0;
-    --gray: #8a8a8a;
-    --light-gray: #e8e6e0;
-    --accent: #c8c4b8;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--white);
-    color: var(--black);
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    overflow-x: hidden;
-    cursor: none;
-  }
-
-  /* Custom cursor */
-  .cursor {
-    position: fixed;
-    width: 8px; height: 8px;
-    background: var(--black);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: width 0.3s, height 0.3s, background 0.3s;
-  }
-  .cursor.expand {
-    width: 40px; height: 40px;
-    background: transparent;
-    border: 1px solid var(--black);
-  }
-
-  /* Nav */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 28px 48px;
-    mix-blend-mode: multiply;
-  }
-
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    font-weight: 300;
-    letter-spacing: 0.2em;
-    text-transform: lowercase;
-    color: var(--black);
-    text-decoration: none;
-  }
-
-  .nav-links {
-    display: flex; gap: 40px; list-style: none;
-  }
-  .nav-links a {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    font-weight: 300;
-    letter-spacing: 0.15em;
-    text-transform: lowercase;
-    color: var(--black);
-    text-decoration: none;
-    opacity: 0.6;
-    transition: opacity 0.3s;
-  }
-  .nav-links a:hover { opacity: 1; }
-
-  /* Hero */
+  /* ===== HERO ===== */
   .hero {
     height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
   }
-
   .hero-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 80px 48px;
-    position: relative;
-    z-index: 2;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 80px 48px; position: relative; z-index: 2;
   }
-
   .hero-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gray);
-    margin-bottom: 32px;
-    opacity: 0;
-    animation: fadeUp 1s ease forwards 0.3s;
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gray); margin-bottom: 32px;
+    opacity: 0; animation: fadeUp 1s ease forwards 0.3s;
   }
-
   .hero-title {
     font-size: clamp(64px, 8vw, 108px);
-    font-weight: 300;
-    line-height: 0.9;
-    letter-spacing: -0.02em;
-    opacity: 0;
-    animation: fadeUp 1s ease forwards 0.5s;
+    font-weight: 300; line-height: 0.9; letter-spacing: -0.02em;
+    opacity: 0; animation: fadeUp 1s ease forwards 0.5s;
   }
-
-  .hero-title em {
-    font-style: italic;
-    display: block;
-  }
-
+  .hero-title em { font-style: italic; display: block; }
   .hero-sub {
-    margin-top: 48px;
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 1.8;
-    color: var(--gray);
-    max-width: 320px;
-    opacity: 0;
-    animation: fadeUp 1s ease forwards 0.7s;
+    margin-top: 48px; font-size: 16px; font-weight: 300;
+    line-height: 1.8; color: var(--gray); max-width: 320px;
+    opacity: 0; animation: fadeUp 1s ease forwards 0.7s;
   }
-
   .hero-cta {
     margin-top: 48px;
-    opacity: 0;
-    animation: fadeUp 1s ease forwards 0.9s;
+    opacity: 0; animation: fadeUp 1s ease forwards 0.9s;
   }
-
-  .btn-primary {
-    display: inline-block;
-    padding: 16px 40px;
-    border: 1px solid var(--black);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
-    letter-spacing: 0.2em;
-    text-transform: lowercase;
-    color: var(--black);
-    text-decoration: none;
-    transition: background 0.4s, color 0.4s;
-    position: relative;
-    overflow: hidden;
-  }
-  .btn-primary::before {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: var(--black);
-    transition: left 0.4s ease;
-    z-index: -1;
-  }
-  .btn-primary:hover::before { left: 0; }
-  .btn-primary:hover { color: var(--white); }
-
   .hero-right {
-    position: relative;
-    overflow: hidden;
-    opacity: 0;
-    animation: fadeIn 1.4s ease forwards 0.4s;
+    position: relative; overflow: hidden;
+    opacity: 0; animation: fadeIn 1.4s ease forwards 0.4s;
   }
-
-  /* SVG artwork mockup */
   .hero-artwork {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 72%;
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); width: 72%;
   }
-
   .hero-scroll {
-    position: absolute;
-    bottom: 40px; left: 48px;
+    position: absolute; bottom: 40px; left: 48px;
     display: flex; align-items: center; gap: 16px;
     font-size: 11px; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--gray);
-    opacity: 0;
-    animation: fadeIn 1s ease forwards 1.2s;
+    opacity: 0; animation: fadeIn 1s ease forwards 1.2s;
   }
   .scroll-line {
-    width: 48px; height: 1px;
-    background: var(--gray);
-    position: relative;
-    overflow: hidden;
+    width: 48px; height: 1px; background: var(--gray);
+    position: relative; overflow: hidden;
   }
   .scroll-line::after {
     content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: var(--black);
+    position: absolute; top: 0; left: -100%;
+    width: 100%; height: 100%; background: var(--black);
     animation: scanLine 2s ease infinite 1.5s;
   }
 
-  /* Section base */
-  section { padding: 120px 48px; }
-
-  .section-number {
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gray);
-    margin-bottom: 80px;
-    display: flex; align-items: center; gap: 24px;
-  }
-  .section-number::after {
-    content: '';
-    flex: 1; height: 1px;
-    background: var(--light-gray);
-  }
-
-  /* Gallery */
-  .gallery {
+  /* ===== PAGE LINKS ===== */
+  .page-links {
     background: var(--black);
-    color: var(--white);
-    padding: 120px 48px;
-  }
-
-  .gallery .section-number { color: var(--accent); }
-  .gallery .section-number::after { background: #2a2a2a; }
-
-  .gallery-title {
-    font-size: clamp(36px, 5vw, 64px);
-    font-weight: 300;
-    font-style: italic;
-    margin-bottom: 80px;
-  }
-
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-  }
-
-  .gallery-item {
-    position: relative;
-    aspect-ratio: 1;
-    background: #1a1a1a;
-    overflow: hidden;
-    cursor: none;
-  }
-
-  .gallery-item:first-child {
-    grid-column: span 2;
-    aspect-ratio: 2/1;
-  }
-
-  .gallery-item svg {
-    width: 100%; height: 100%;
-    padding: 10%;
-    transition: transform 0.6s ease;
-  }
-  .gallery-item:hover svg { transform: scale(1.05); }
-
-  .gallery-item-info {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    padding: 24px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
-    transform: translateY(100%);
-    transition: transform 0.4s ease;
-  }
-  .gallery-item:hover .gallery-item-info { transform: translateY(0); }
-
-  .gallery-item-title {
-    font-size: 14px; font-weight: 300;
-    letter-spacing: 0.1em;
-    color: var(--white);
-  }
-  .gallery-item-price {
-    font-size: 12px; color: var(--accent);
-    margin-top: 4px; letter-spacing: 0.05em;
-  }
-
-  /* About */
-  #about { background: var(--white); }
-
-  .about {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-  }
-
-  .about-visual {
-    position: sticky;
-    top: 120px;
-  }
-
-  .about-portrait {
-    width: 100%;
-    aspect-ratio: 3/4;
-    background: var(--light-gray);
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
-  }
-
-  .about-content { padding-top: 40px; }
-
-  .about-title {
-    font-size: clamp(32px, 4vw, 52px);
-    font-weight: 300;
-    line-height: 1.1;
-    margin-bottom: 40px;
-  }
-  .about-title em { font-style: italic; }
-
-  .about-text {
-    font-size: 18px;
-    font-weight: 300;
-    line-height: 2;
-    color: #444;
-    margin-bottom: 24px;
-  }
-
-  .about-statement {
-    margin-top: 48px;
-    padding: 32px;
-    border-left: 1px solid var(--black);
-    font-size: 22px;
-    font-style: italic;
-    font-weight: 300;
-    line-height: 1.6;
-    color: var(--black);
-  }
-
-  /* Works / Price */
-  .works {
-    background: var(--light-gray);
-  }
-
-  .works-title {
-    font-size: clamp(36px, 5vw, 64px);
-    font-weight: 300;
-    margin-bottom: 80px;
-  }
-
-  .works-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1px;
-    background: var(--accent);
+    background-color: #1a1a1a;
   }
-
-  .work-card {
-    background: var(--white);
-    padding: 48px 40px;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.4s;
-    cursor: none;
-  }
-  .work-card:hover { background: var(--black); color: var(--white); }
-
-  .work-card-size {
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gray);
-    margin-bottom: 24px;
-    transition: color 0.4s;
-  }
-  .work-card:hover .work-card-size { color: var(--accent); }
-
-  .work-card-title {
-    font-size: 28px;
-    font-weight: 300;
-    font-style: italic;
-    margin-bottom: 16px;
-    line-height: 1.2;
-  }
-
-  .work-card-price {
-    font-size: 36px;
-    font-weight: 300;
-    letter-spacing: -0.02em;
-    margin: 32px 0 8px;
-  }
-
-  .work-card-note {
-    font-size: 13px;
-    color: var(--gray);
-    transition: color 0.4s;
-  }
-  .work-card:hover .work-card-note { color: var(--accent); }
-
-  .work-card-dims {
-    margin-top: 32px;
-    padding-top: 24px;
-    border-top: 1px solid var(--light-gray);
-    font-size: 13px;
-    color: var(--gray);
-    transition: border-color 0.4s, color 0.4s;
-  }
-  .work-card:hover .work-card-dims { border-color: #2a2a2a; color: var(--accent); }
-
-  .work-card-cta {
-    display: inline-block;
-    margin-top: 32px;
-    font-size: 13px;
-    letter-spacing: 0.2em;
-    text-transform: lowercase;
-    text-decoration: none;
-    color: inherit;
-    padding-bottom: 4px;
-    border-bottom: 1px solid currentColor;
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.3s, transform 0.3s;
-  }
-  .work-card:hover .work-card-cta { opacity: 1; transform: translateY(0); }
-
-  /* Process */
-  .process {
-    padding: 120px 48px;
-  }
-
-  .process-title {
-    font-size: clamp(36px, 5vw, 64px);
-    font-weight: 300;
-    margin-bottom: 80px;
-  }
-
-  .process-steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
-    background: var(--light-gray);
-  }
-
-  .process-step {
-    background: var(--white);
-    padding: 48px 32px;
-  }
-
-  .step-num {
-    font-size: 72px;
-    font-weight: 300;
-    line-height: 1;
-    color: var(--light-gray);
-    margin-bottom: 24px;
-    font-style: italic;
-  }
-
-  .step-title {
-    font-size: 20px;
-    font-weight: 300;
-    margin-bottom: 16px;
-  }
-
-  .step-text {
-    font-size: 15px;
-    font-weight: 300;
-    line-height: 1.9;
-    color: var(--gray);
-  }
-
-  /* Contact / CTA */
-  .contact {
+  .page-link-item {
     background: var(--black);
-    color: var(--white);
-    padding: 160px 48px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .contact::before {
-    content: 'marni';
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 30vw;
-    font-weight: 300;
-    font-style: italic;
-    color: #111;
-    white-space: nowrap;
-    letter-spacing: -0.05em;
-    pointer-events: none;
-  }
-
-  .contact-inner { position: relative; z-index: 2; }
-
-  .contact-title {
-    font-size: clamp(36px, 6vw, 80px);
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.1;
-    margin-bottom: 24px;
-  }
-
-  .contact-sub {
-    font-size: 18px;
-    font-weight: 300;
-    color: var(--accent);
-    margin-bottom: 64px;
-  }
-
-  .contact-email {
-    display: inline-block;
-    font-size: clamp(16px, 2vw, 22px);
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    color: var(--white);
+    padding: 72px 48px;
     text-decoration: none;
-    border-bottom: 1px solid var(--accent);
-    padding-bottom: 8px;
-    transition: border-color 0.3s;
-  }
-  .contact-email:hover { border-color: var(--white); }
-
-  .contact-sns {
-    margin-top: 64px;
-    display: flex; justify-content: center; gap: 40px;
-  }
-  .contact-sns a {
-    font-size: 13px;
-    letter-spacing: 0.2em;
-    text-transform: lowercase;
-    color: var(--accent);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  .contact-sns a:hover { color: var(--white); }
-
-  /* Footer */
-  footer {
-    padding: 32px 48px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid var(--light-gray);
-    font-size: 12px;
-    color: var(--gray);
-    letter-spacing: 0.1em;
-  }
-
-  /* Animations */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  @keyframes scanLine {
-    0% { left: -100%; }
-    100% { left: 100%; }
-  }
-
-  /* Reveal on scroll */
-  .reveal {
-    opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
-
-  /* Horizontal rule */
-  hr { border: none; border-top: 1px solid var(--light-gray); margin: 0; }
-
-  /* ===== NAV OVERLAY ===== */
-  .nav-menu-btn {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 6px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
-    z-index: 200;
-  }
-  .nav-menu-btn span {
+    color: var(--white);
     display: block;
-    width: 24px;
-    height: 1px;
-    background: var(--black);
-    transition: transform 0.3s, opacity 0.3s;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.5s;
   }
-  .nav-menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .nav-menu-btn.open span:nth-child(2) { opacity: 0; }
-  .nav-menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-  .nav-overlay {
-    position: fixed;
-    inset: 0;
-    background: var(--white);
-    z-index: 150;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
+  .page-link-item::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: #111; opacity: 0;
+    transition: opacity 0.5s;
   }
-  .nav-overlay.open {
-    opacity: 1;
-    pointer-events: all;
+  .page-link-item:hover { background: #111; }
+  .page-link-num {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 40px;
   }
-  .nav-overlay-links {
-    list-style: none;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+  .page-link-title {
+    font-size: clamp(32px, 3.5vw, 52px);
+    font-weight: 300; font-style: italic;
+    line-height: 1; margin-bottom: 24px;
   }
-  .nav-overlay-links a {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 40px;
-    font-weight: 300;
-    font-style: italic;
-    letter-spacing: 0.03em;
-    color: var(--black);
-    text-decoration: none;
-    transition: opacity 0.3s;
+  .page-link-sub {
+    font-size: 14px; font-weight: 300;
+    line-height: 1.9; color: #888; margin-bottom: 40px;
   }
-  .nav-overlay-links a:hover { opacity: 0.4; }
-  .nav-overlay-close {
-    position: absolute;
-    top: 22px; right: 24px;
-    background: none;
-    border: none;
-    font-size: 28px;
-    line-height: 1;
-    cursor: pointer;
-    color: var(--black);
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
+  .page-link-cta {
+    font-size: 12px; letter-spacing: 0.2em;
+    text-transform: lowercase; color: var(--accent);
+    display: flex; align-items: center; gap: 12px;
   }
+  .page-link-cta::after {
+    content: '';
+    width: 32px; height: 1px; background: var(--accent);
+    transition: width 0.4s;
+  }
+  .page-link-item:hover .page-link-cta::after { width: 56px; }
 
   /* ===== MOBILE ===== */
   @media (max-width: 768px) {
-    body { cursor: auto; }
-    .cursor { display: none; }
-
-    /* Nav */
-    nav {
-      padding: 20px 24px;
-      mix-blend-mode: normal;
-      background: var(--white);
-    }
-    .nav-links { display: none; }
-    .nav-menu-btn { display: flex; }
-
-    /* Hero */
-    .hero {
-      grid-template-columns: 1fr;
-      height: auto;
-      min-height: 100svh;
-    }
-    .hero-left {
-      padding: 100px 24px 48px;
-      justify-content: flex-end;
-    }
-    .hero-right {
-      height: 72vw;
-      min-height: 280px;
-    }
+    .hero { grid-template-columns: 1fr; height: auto; min-height: 100svh; }
+    .hero-left { padding: 100px 24px 48px; justify-content: flex-end; }
+    .hero-right { height: 72vw; min-height: 280px; }
     .hero-scroll { display: none; }
 
-    /* Section base */
-    section { padding: 72px 24px; }
-
-    /* Gallery */
-    .gallery { padding: 72px 24px; }
-    .gallery-grid { grid-template-columns: 1fr; }
-    .gallery-item:first-child {
-      grid-column: span 1;
-      aspect-ratio: 1;
-    }
-    .gallery-item { cursor: auto; }
-    .gallery-item-info { transform: translateY(0); }
-
-    /* About */
-    #about { padding: 72px 24px; }
-    .about {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
-    .about-visual {
-      position: static;
-      top: auto;
-    }
-    .about-portrait { aspect-ratio: 4/3; }
-    .about-content { padding-top: 0; }
-
-    /* Works */
-    .works { padding: 72px 24px; }
-    .works-list { grid-template-columns: 1fr; }
-    .work-card { cursor: auto; }
-    .work-card-cta {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Process */
-    .process { padding: 72px 24px; }
-    .process-steps { grid-template-columns: 1fr 1fr; }
-    .process-step { padding: 32px 20px; }
-
-    /* Contact */
-    .contact { padding: 100px 24px; }
-
-    /* Footer */
-    footer {
-      padding: 24px;
-      flex-direction: column;
-      gap: 8px;
-      text-align: center;
-    }
-
-    /* Info notice */
-    #price > div:last-child { margin-top: 32px; }
-  }
-
-  @media (max-width: 480px) {
-    .process-steps { grid-template-columns: 1fr; }
-    .contact-sns { gap: 24px; }
+    .page-links { grid-template-columns: 1fr; }
+    .page-link-item { padding: 48px 24px; }
   }
 </style>
 </head>
@@ -744,24 +130,22 @@
 
 <div class="cursor" id="cursor"></div>
 
-<!-- Nav overlay (mobile) -->
 <div class="nav-overlay" id="navOverlay">
   <button class="nav-overlay-close" id="menuClose" aria-label="閉じる">×</button>
   <ul class="nav-overlay-links">
-    <li><a href="#gallery" class="overlay-link">works</a></li>
-    <li><a href="#about" class="overlay-link">about</a></li>
-    <li><a href="#price" class="overlay-link">price</a></li>
+    <li><a href="works.html" class="overlay-link">works</a></li>
+    <li><a href="concept.html" class="overlay-link">concept</a></li>
+    <li><a href="process.html" class="overlay-link">process</a></li>
     <li><a href="#contact" class="overlay-link">contact</a></li>
   </ul>
 </div>
 
-<!-- Nav -->
 <nav>
-  <a href="#" class="nav-logo">marni</a>
+  <a href="index.html" class="nav-logo">marni</a>
   <ul class="nav-links">
-    <li><a href="#gallery">works</a></li>
-    <li><a href="#about">about</a></li>
-    <li><a href="#price">price</a></li>
+    <li><a href="works.html">works</a></li>
+    <li><a href="concept.html">concept</a></li>
+    <li><a href="process.html">process</a></li>
     <li><a href="#contact">contact</a></li>
   </ul>
   <button class="nav-menu-btn" id="menuBtn" aria-label="メニューを開く">
@@ -782,23 +166,16 @@
       木から生まれた、一点物のウォールアート。
     </p>
     <div class="hero-cta">
-      <a href="#gallery" class="btn-primary">works を見る</a>
+      <a href="works.html" class="btn-primary">works を見る</a>
     </div>
   </div>
   <div class="hero-right">
-    <!-- Artwork SVG mockup inspired by the style -->
     <svg class="hero-artwork" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Background panel -->
       <rect width="500" height="500" fill="#e8e6e0"/>
-      <!-- Gray base panel -->
       <rect x="20" y="20" width="460" height="460" fill="#c8c4b8" rx="2"/>
-      <!-- Yellow/cream upper form -->
       <path d="M40 40 L460 40 L460 240 Q380 200 300 220 Q220 240 180 200 Q120 160 40 180 Z" fill="#d4c89a"/>
-      <!-- Circle sun -->
       <circle cx="380" cy="100" r="55" fill="#f0ead8"/>
-      <!-- Lower yellow form -->
       <path d="M40 260 L460 260 L460 460 L40 460 Z" fill="#d4c89a"/>
-      <!-- Organic white/black bird-like form -->
       <path d="M200 330 Q180 290 220 280 Q260 270 280 300 Q310 280 330 310 Q350 340 320 360 Q290 380 260 370 Q230 360 210 350 Z" fill="#f0ead8"/>
       <path d="M270 285 Q290 265 310 275 Q300 295 285 295 Z" fill="#1a1a1a"/>
       <path d="M220 340 Q200 370 180 360 Q185 340 205 340 Z" fill="#f0ead8"/>
@@ -812,198 +189,36 @@
 
 <hr>
 
-<!-- Gallery -->
-<section class="gallery" id="gallery">
-  <div class="section-number">01 — works</div>
-  <h2 class="gallery-title reveal">Selected pieces</h2>
-  <div class="gallery-grid">
-
-    <div class="gallery-item reveal">
-      <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-        <rect width="800" height="400" fill="#111"/>
-        <path d="M100 80 L700 80 L700 280 Q600 240 500 260 Q380 280 300 240 Q200 200 100 220 Z" fill="#c8b860" opacity="0.9"/>
-        <circle cx="600" cy="140" r="60" fill="#e8dcc0" opacity="0.8"/>
-        <path d="M200 290 L700 290 L700 360 L200 360 Z" fill="#c8b860" opacity="0.7"/>
-        <path d="M350 310 Q320 280 360 268 Q400 256 420 280 Q450 260 470 290 Q490 320 460 340 Q430 355 400 345 Q370 335 355 320 Z" fill="#e8dcc0" opacity="0.9"/>
-        <path d="M415 270 Q435 250 455 262 Q445 282 428 280 Z" fill="#111"/>
-      </svg>
-      <div class="gallery-item-info">
-        <div class="gallery-item-title">Untitled #01 — yellow ground</div>
-        <div class="gallery-item-price">¥ 45,000</div>
-      </div>
+<!-- Page links -->
+<div class="page-links">
+  <a href="works.html" class="page-link-item reveal">
+    <div class="page-link-num">01 — works</div>
+    <div class="page-link-title">作品</div>
+    <div class="page-link-sub">
+      A4からラージサイズまで、<br>
+      一点制作のウォールアート。
     </div>
-
-    <div class="gallery-item reveal reveal-delay-1">
-      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-        <rect width="400" height="400" fill="#111"/>
-        <rect x="20" y="20" width="360" height="360" fill="#f0ede4"/>
-        <ellipse cx="200" cy="130" rx="120" ry="60" fill="#2a2a2a" opacity="0.85"/>
-        <ellipse cx="160" cy="220" rx="90" ry="40" fill="#1a1a1a" opacity="0.9"/>
-        <ellipse cx="280" cy="200" rx="28" ry="40" fill="#1a1a1a" opacity="0.8"/>
-        <path d="M100 290 Q80 260 120 250 Q150 240 160 268 Q170 245 185 260 Q180 290 160 300 Q130 310 100 290 Z" fill="#111" opacity="0.85"/>
-        <ellipse cx="295" cy="305" rx="38" ry="32" fill="#1a1a1a" opacity="0.8"/>
-      </svg>
-      <div class="gallery-item-info">
-        <div class="gallery-item-title">Untitled #02 — black forms</div>
-        <div class="gallery-item-price">¥ 38,000</div>
-      </div>
+    <div class="page-link-cta">ギャラリーを見る</div>
+  </a>
+  <a href="concept.html" class="page-link-item reveal reveal-delay-1">
+    <div class="page-link-num">02 — concept</div>
+    <div class="page-link-title">コンセプト</div>
+    <div class="page-link-sub">
+      形と素材の探求。<br>
+      marniが大切にしていること。
     </div>
-
-    <div class="gallery-item reveal reveal-delay-2">
-      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-        <rect width="400" height="400" fill="#111"/>
-        <rect x="20" y="20" width="360" height="360" fill="#1e1e1e"/>
-        <path d="M80 200 Q80 80 200 80 Q320 80 320 200 Q320 300 240 340 Q160 380 80 320 Z" fill="#2e2e2e"/>
-        <path d="M120 200 Q120 120 200 120 Q280 120 280 200 Q280 260 240 290 Q200 320 120 280 Z" fill="#c8c4b8" opacity="0.3"/>
-        <circle cx="200" cy="180" r="40" fill="#c8b860" opacity="0.6"/>
-        <path d="M150 240 Q160 210 180 220 Q200 230 195 255 Q185 275 160 265 Z" fill="#f0ede4" opacity="0.5"/>
-      </svg>
-      <div class="gallery-item-info">
-        <div class="gallery-item-title">Untitled #03 — night form</div>
-        <div class="gallery-item-price">¥ 55,000</div>
-      </div>
+    <div class="page-link-cta">ブランドについて</div>
+  </a>
+  <a href="process.html" class="page-link-item reveal reveal-delay-2">
+    <div class="page-link-num">03 — process</div>
+    <div class="page-link-title">制作</div>
+    <div class="page-link-sub">
+      スケッチから完成まで、<br>
+      制作の4つのステップ。
     </div>
-
-    <div class="gallery-item reveal reveal-delay-1">
-      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-        <rect width="400" height="400" fill="#111"/>
-        <rect x="20" y="20" width="360" height="360" fill="#e8e4d8"/>
-        <path d="M60 200 Q60 100 160 80 Q260 60 320 160 Q380 260 300 340 Q220 400 140 360 Q60 320 60 200 Z" fill="#c8c4b8" opacity="0.5"/>
-        <ellipse cx="200" cy="200" rx="80" ry="110" fill="#1a1a1a" opacity="0.85"/>
-        <ellipse cx="200" cy="180" rx="55" ry="70" fill="#f0ede4" opacity="0.9"/>
-        <circle cx="180" cy="165" r="18" fill="#1a1a1a"/>
-      </svg>
-      <div class="gallery-item-info">
-        <div class="gallery-item-title">Untitled #04 — oval study</div>
-        <div class="gallery-item-price">¥ 28,000</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- About -->
-<section id="about">
-  <div class="section-number reveal">02 — about</div>
-  <div class="about">
-    <div class="about-visual reveal">
-      <div class="about-portrait">
-        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
-          <rect width="300" height="400" fill="#e8e4d8"/>
-          <!-- Abstract self-portrait style -->
-          <path d="M80 280 Q80 160 150 120 Q220 80 240 160 Q260 240 220 310 Q180 380 80 350 Z" fill="#c8c4b8"/>
-          <ellipse cx="155" cy="180" rx="55" ry="70" fill="#d4c8a8"/>
-          <circle cx="135" cy="165" r="12" fill="#1a1a1a"/>
-          <circle cx="175" cy="162" r="12" fill="#1a1a1a"/>
-          <path d="M130 200 Q155 215 180 200" stroke="#1a1a1a" stroke-width="2" fill="none"/>
-        </svg>
-      </div>
-    </div>
-    <div class="about-content reveal reveal-delay-1">
-      <h2 class="about-title">形は、<br><em>思考の残像だ。</em></h2>
-      <p class="about-text">
-        現代アートの文脈を学びながら、有機的なフォームと素材の対話を探求している。
-        木を切り、塗り、重ねる過程は、アイデアを空間に定着させる行為だと思っている。
-      </p>
-      <p class="about-text">
-        シュルレアリスムやバイオモーフィックアブストラクションの系譜に立ちながら、
-        それを「今日の部屋」に持ち込むことを試みる。
-        美術館の作品が家の壁にある、その感覚を。
-      </p>
-      <blockquote class="about-statement">
-        「自然が果実を生み出すように、<br>
-        作品が壁から生えてくるような感覚を作りたい。」
-      </blockquote>
-      <p class="about-text" style="margin-top: 40px; font-size: 14px; letter-spacing: 0.05em; color: #8a8a8a;">
-        素材：シナベニヤ、MDF、アクリル塗料<br>
-        すべて手作業による一点制作
-      </p>
-    </div>
-  </div>
-</section>
-
-<hr>
-
-<!-- Price / Works -->
-<section class="works" id="price">
-  <div class="section-number reveal">03 — price</div>
-  <h2 class="works-title reveal">作品を選ぶ</h2>
-  <div class="works-list">
-
-    <div class="work-card reveal">
-      <div class="work-card-size">small</div>
-      <div class="work-card-title">A4 — A3<br>サイズ</div>
-      <div class="work-card-price">¥18,000〜</div>
-      <div class="work-card-note">税込 / 送料別</div>
-      <div class="work-card-dims">
-        約 21×30cm 〜 30×42cm<br>
-        一人暮らし・デスクまわりに
-      </div>
-      <a href="#contact" class="work-card-cta">問い合わせる →</a>
-    </div>
-
-    <div class="work-card reveal reveal-delay-1">
-      <div class="work-card-size">medium — most popular</div>
-      <div class="work-card-title">40×40<br>サイズ</div>
-      <div class="work-card-price">¥35,000〜</div>
-      <div class="work-card-note">税込 / 送料別</div>
-      <div class="work-card-dims">
-        約 40×40cm 〜 50×50cm<br>
-        リビング・寝室のメインウォールに
-      </div>
-      <a href="#contact" class="work-card-cta">問い合わせる →</a>
-    </div>
-
-    <div class="work-card reveal reveal-delay-2">
-      <div class="work-card-size">large</div>
-      <div class="work-card-title">60cm+<br>サイズ</div>
-      <div class="work-card-price">¥70,000〜</div>
-      <div class="work-card-note">税込 / 送料別</div>
-      <div class="work-card-dims">
-        約 60×60cm 以上<br>
-        存在感のある空間づくりに
-      </div>
-      <a href="#contact" class="work-card-cta">問い合わせる →</a>
-    </div>
-
-  </div>
-
-  <div style="margin-top: 48px; padding: 32px; border: 1px solid var(--accent); background: var(--white);" class="reveal">
-    <p style="font-size: 14px; line-height: 2; color: var(--gray); letter-spacing: 0.05em;">
-      すべての作品は一点制作です。同じ作品は存在しません。<br>
-      サイズ・カラーのカスタム相談も承ります。インスタグラムかメールにてお問い合わせください。<br>
-      発送は梱包後、ヤマトの宅急便コンパクト / 通常便にて対応しています。
-    </p>
-  </div>
-</section>
-
-<!-- Process -->
-<section class="process" id="process">
-  <div class="section-number reveal">04 — process</div>
-  <h2 class="process-title reveal">制作について</h2>
-  <div class="process-steps">
-    <div class="process-step reveal">
-      <div class="step-num">01</div>
-      <div class="step-title">sketch</div>
-      <p class="step-text">有機的なフォームをスケッチで探る。自然物・身体・記憶から形を引き出す。</p>
-    </div>
-    <div class="process-step reveal reveal-delay-1">
-      <div class="step-num">02</div>
-      <div class="step-title">cut</div>
-      <p class="step-text">型紙をもとにシナベニヤ・MDFを切り出す。曲線の精度が作品の質を決める。</p>
-    </div>
-    <div class="process-step reveal reveal-delay-2">
-      <div class="step-num">03</div>
-      <div class="step-title">paint</div>
-      <p class="step-text">アクリル塗料で着彩。パーツごとに塗り重ね、色の深みと木の質感を両立させる。</p>
-    </div>
-    <div class="process-step reveal reveal-delay-3">
-      <div class="step-num">04</div>
-      <div class="step-title">compose</div>
-      <p class="step-text">ベースに形を配置・接着し、立体感を調整。吊り金具をつけて完成。</p>
-    </div>
-  </div>
-</section>
+    <div class="page-link-cta">制作について</div>
+  </a>
+</div>
 
 <!-- Contact -->
 <section class="contact" id="contact">
@@ -1021,56 +236,35 @@
   </div>
 </section>
 
-<!-- Footer -->
 <footer>
   <span>© 2025 marni</span>
   <span>wall works — original art objects</span>
 </footer>
 
 <script>
-  // Hamburger menu
   const menuBtn = document.getElementById('menuBtn');
   const menuClose = document.getElementById('menuClose');
   const navOverlay = document.getElementById('navOverlay');
-
-  function openMenu() {
-    navOverlay.classList.add('open');
-    menuBtn.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeMenu() {
-    navOverlay.classList.remove('open');
-    menuBtn.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
+  function openMenu() { navOverlay.classList.add('open'); menuBtn.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { navOverlay.classList.remove('open'); menuBtn.classList.remove('open'); document.body.style.overflow = ''; }
   menuBtn.addEventListener('click', openMenu);
   menuClose.addEventListener('click', closeMenu);
-  document.querySelectorAll('.overlay-link').forEach(link => {
-    link.addEventListener('click', closeMenu);
-  });
+  document.querySelectorAll('.overlay-link').forEach(l => l.addEventListener('click', closeMenu));
 
-  // Custom cursor
   const cursor = document.getElementById('cursor');
   document.addEventListener('mousemove', e => {
     cursor.style.left = e.clientX + 'px';
     cursor.style.top = e.clientY + 'px';
   });
-  document.querySelectorAll('a, .gallery-item, .work-card').forEach(el => {
+  document.querySelectorAll('a, .page-link-item').forEach(el => {
     el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
   });
 
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  reveals.forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
